@@ -12,6 +12,8 @@ import { FooterComponent } from './footer/footer.component';
 import { StockageCategoryComponent } from './prodCategory/stockage-category/stockage-category.component';
 import { ImpCopCategoryComponent } from './prodCategory/imp-cop-category/imp-cop-category.component';
 import { AccessCategoryComponent } from './prodCategory/access-category/access-category.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -26,10 +28,12 @@ import { AccessCategoryComponent } from './prodCategory/access-category/access-c
     StockageCategoryComponent,
     ImpCopCategoryComponent,
     AccessCategoryComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

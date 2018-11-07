@@ -1,0 +1,12 @@
+#searchBox {
+  width:500px;
+}
+.dropdown-menu {
+  top: 100%;
+}
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}

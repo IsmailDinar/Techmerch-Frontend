@@ -1,116 +1,28 @@
 <div class="container">
-    <div class="row">
-      <!--Card1-->
-      <div class="col">
-          <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./img/2.jpg" alt="Card image cap">
-              <div class="card-body text-center">
-                <h5 class="card-title">PC PORTABLE HP 15-DA0002NK</h5>
-
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card1">Description</a>
-              </div>
-            </div>
-      </div>
-      <div class="modal fade" id="card1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">PC PORTABLE HP 15-DA0002NK</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <img class="card-img-top" src="./img/2.jpg" alt="Card image cap">
-                  <p class="card-text">Ecran 15.6" HD LED - Processeur Intel Celeron N4000, up to 2.6 GHz, 4 Mo de mémoire cache - Mémoire 4 Go - Disque 1 To - Carte graphique Intel UHD 600 - Wifi - Bluetooth - HDMI  - 2x USB 3.1 - Lecteur de cartes - Couleur Bleu - Garantie 1 an</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add to cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      <!--Card2-->
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="./img/1.jpg" alt="Card image cap">
-                <div class="card-body text-center">
-                  <h5 class="card-title">PC PORTABLE ASUS VIVOBOOK MAX X541NA</h5>
-                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card2">Description</a>
-                </div>
-              </div>
-        </div>
-        <div class="modal fade" id="card2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">PC PORTABLE ASUS VIVOBOOK MAX X541NA</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <img class="card-img-top" src="./img/1.jpg" alt="Card image cap">
-                    <p class="card-text">Ecran 15.6" HD LED - Processeur Intel Celeron Dual Core N3350, up to 2.4 Ghz, 2 Mo de mémoire cache - Mémoire 4 Go - Disque 500 Go - Carte graphique Intel HD Graphics - Graveur DVD - Lecteur de cartes - Wifi - Bluetooth - USB 3.0 - HDMI - Webcam avec Micro - Couleur Noir - Garantie 1 an</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Add to cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-      <!--card3-->
-      <div class="col">
-          <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="./img/3.jpg" alt="Card image cap">
-              <div class="card-body text-center">
-                <h5 class="card-title">PC DE BUREAU STRIKER I-00A</h5>
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card3">Description</a>
-              </div>
-            </div>
-      </div>
-      <div class="modal fade" id="card3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">PC DE BUREAU STRIKER I-00A</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <img class="card-img-top" src="./img/3.jpg" alt="Card image cap">
-                  <p class="card-text">Boitier X-Worrior - Processeur Intel Core i7-3770 3é Génération 3.4 Ghz , 8 Mo de mémoire cache - Carte mère Asus P8Z77 MAXIMUS V GENE - 8 Go de mémoire Corsair (2x4Go) 1600Mhz DDR3 - Disque Dur 2To Seagate - Carte graphique MSI GTX 680 Lightning , 2 Go de mémoire dédiée DDR5 - Alimentation 600W - Clavier&Souris Sans fil Microsoft - Graveur DVD - Garantie 1 an</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Add to cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="w-100"></div>
-    <!--card4-->
-    <div class="col">
+<div class="row justify-content-between">
+  <ng-container *ngFor="let p of products; let i=index" >
+    <div class="col-4">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./img/4.jpg" alt="Card image cap">
+            <img class="card-img-top" [src]="p.productImgurl" alt="Card image cap">
             <div class="card-body text-center">
-              <h5 class="card-title">TABLETTE HUAWEI MEDIAPAD M2 8.0</h5>
-              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card4">Description</a>
+              <h5 class="card-title">{{p.productName}}</h5>
+              <h4 class="product-price">${{p.productPrice}}</h4>
+              <a href="#" class="btn btn-primary" (click)="selectedProduct = p" data-toggle="modal" data-target="#card">Description</a>
             </div>
           </div>
     </div>
-    <div class="modal fade" id="card4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div  class="modal fade" id="card" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">TABLETTE HUAWEI MEDIAPAD M2 8.0</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle"> {{selectedProduct?.productName}} </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <img class="card-img-top" src="./img/4.jpg" alt="Card image cap">
-                <p class="card-text">Ecran 8.0" Full HD IPS - Résoluion 1920 x 1200 - Processeur Kirin930 64 bits Octa-core 2.0 GHz - RAM 2 Go - Mémoire 16 Go extensible jusqu'à 128 Go - Android 5.1 (Lollipop) - 2x Caméras: 8MP autofocus F2.2 avec Flash (Arrière), 2MP (Frontale) - 4G - GPS - WiFi - Bluetooth - Garantie 1 an</p>
+                <img class="card-img-top" src="{{selectedProduct?.productImgurl}}" alt="Card image cap">
+                <p class="card-text">{{selectedProduct?.productDescription}}</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary">Add to cart</button>
@@ -118,65 +30,7 @@
           </div>
         </div>
       </div>
-      <!--card5-->
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./img/5.jpg" alt="Card image cap">
-            <div class="card-body text-center">
-              <h5 class="card-title">PC DE BUREAU APPLE IMAC RETINA 5K </h5>
-              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card5">Description</a>
-            </div>
-          </div>
-    </div>
-    <div class="modal fade" id="card5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">PC DE BUREAU APPLE IMAC RETINA 5K </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <img class="card-img-top" src="./img/5.jpg" alt="Card image cap">
-                <p class="card-text">Ecran 27" Retina 5k - Processeur Intel Core i5, up to 3.9 Ghz, 6 Mo de mémoire cache - Mémoire 8Go - Disque 1To - Carte graphique AMD Radeon R9 M290X, 2Go de mémoire dédiée DDR5 - 4xUSB 3.0 - 2x Thunderbolt/Mini Displat Port - Ethernet Gigabit - Wifi - Bluetooth - Webcam HD Avec 2 Micros - Mac OS X Yosemite - Garantie 1 an</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Add to cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--card6-->
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="./img/6.jpg" alt="Card image cap">
-            <div class="card-body text-center">
-              <h5 class="card-title">PC DE BUREAU HP P6-2430EKM / 4G</h5>
-              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#card6">Description</a>
-            </div>
-          </div>
-    </div>
-    <div class="modal fade" id="card6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">PC DE BUREAU HP P6-2430EKM / 4G</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <img class="card-img-top" src="./img/6.jpg" alt="Card image cap">
-                <p class="card-text">Ecran 21.5" Full HD - Processeur Intel Core i5-3330s 3é Génération , 2.7 GHz , 6 Mo de mémoire cache - Mémoire 4 Go - Disque 500 Go , 7200 tr/min - Carte graphique Intel HD Graphics - Graveur DVD - Lecteur de cartes - USB 3.0 - Garantie 1 an</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Add to cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
+<div *ngIf="(i + 1) % 3 === 0" class="w-100"></div>
+</ng-container>
+</div>
+</div>

@@ -3,7 +3,9 @@
 /*
  Multicoloured Hover Variations
 */
-
+i{
+margin-top:10px;
+}
 #social-fb {
   color: #3B5998;
   margin-right: 5px;

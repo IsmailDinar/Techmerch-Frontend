@@ -7,6 +7,7 @@ import { PhonesCategoryComponent } from './prodCategory/phones-category/phones-c
 import { OrdTabCategoryComponent } from './prodCategory/ord-tab-category/ord-tab-category.component';
 import { HomeComponent } from './home/home.component';
 import { StockageCategoryComponent } from './prodCategory/stockage-category/stockage-category.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   { path: 'ordinateurs&tablettes', component: OrdTabCategoryComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'stockage', component: StockageCategoryComponent },
   { path: 'impression&copieurs', component: ImpCopCategoryComponent },
-  { path: 'accessories', component: AccessCategoryComponent }
+  { path: 'accessories', component: AccessCategoryComponent },
+  { path: 'shoppingcart', component: ShoppingCartComponent }
 ];
 
 @NgModule({
