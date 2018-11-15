@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-md blue-darken float-1 ">
+  <a class="navbar-brand  text-light nav-link" routerLink="/" routerLinkActive="active current"><strong>Techmerch</strong></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+  <span ><i class="fa fa-bars text-light"></i></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav ml-auto pt-2 pt-lg-0 ">
+    <li class="nav-item ">
+      <a class="nav-link text-light" routerLink="/shoppingcart" routerLinkActive="active current"><i
+          class="fa fa-envelope mr-1 ml-1"></i>Contact</a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link text-light" routerLink="/shoppingcart" routerLinkActive="active current"><span class="badge badge-danger">4</span><i
+          class="fa fa-shopping-cart mr-1 ml-1"></i>Cart</a>
+    </li>
+    <li class="nav-item dropdown ">
+      <a class="nav-link text-light" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false"><i class="fa fa-user mr-1"></i>My account</a>
+      <div class="dropdown-menu dropdown-menu-right  dropdown" aria-labelledby="dropdownId">
+        <a class="dropdown-item" href="#">My account</a>
+        <a class="dropdown-item" href="#">My orders</a>
+        <a class="dropdown-item" routerLink="/admin/manage-products">Manage Products</a>
+        <a class="dropdown-item" href="#">Action 2</a>
+        <a class="dropdown-item" href="#">Logout</a>
+
+      </div>
+    </li>
+  </ul>
+</div>
+</nav>

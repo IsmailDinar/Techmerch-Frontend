@@ -1,22 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Headers, RequestOptions, Response, Http } from '@angular/http';
-import {map, catchError } from 'rxjs/operators';
+import {  throwError, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { Product } from '../model/product';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:8080/api';
-  private headers = new Headers({'Content-type': 'application/json'});
-  private options = new RequestOptions({headers: this.headers});
-  constructor(private _http: Http) { }
+  private baseUrl = 'http://localhost:8080/api-product';
+  private categoryId = new Subject<number>();
+  currentCategoryId = this.categoryId.asObservable();
+  constructor(private _http: HttpClient) { }
   getProducts() {
-    return this._http.get(this.baseUrl + '/products', this.options)
-    .pipe(map((response: Response) => response.json()))
+    return this._http.get(this.baseUrl + '/products').
+    pipe(catchError(this.errorHandler));
+  }
+  getProductsByCategory(categoryId: number) {
+    return this._http.get(this.baseUrl + '/products/' + categoryId).
+    pipe(catchError(this.errorHandler));
+  }
+  addProduct(product: Product) {
+
+    return this._http.post(this.baseUrl + '/add', JSON.stringify(product))
     .pipe(catchError(this.errorHandler));
   }
+
+  changeCategory(categoryId: number) {
+    this.categoryId.next(categoryId);
+    console.log(categoryId);
+  }
   errorHandler(error: Response) {
-    return Observable.throw(error || 'Error');
+    return throwError(error || 'Error');
   }
 
 }

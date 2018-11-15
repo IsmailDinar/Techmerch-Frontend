@@ -1,39 +1,32 @@
+import { FooterComponent } from './bars/footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ProductsCategoriesNavBarComponent } from './products-categories-nav-bar/products-categories-nav-bar.component';
-import { OrdTabCategoryComponent } from './prodCategory/ord-tab-category/ord-tab-category.component';
-import { PhonesCategoryComponent } from './prodCategory/phones-category/phones-category.component';
-import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { StockageCategoryComponent } from './prodCategory/stockage-category/stockage-category.component';
-import { ImpCopCategoryComponent } from './prodCategory/imp-cop-category/imp-cop-category.component';
-import { AccessCategoryComponent } from './prodCategory/access-category/access-category.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { HttpModule } from '@angular/http';
-
+import { HttpClientModule } from '@angular/common/http';
+import { CategoriesBarComponent } from './bars/categories-bar/categories-bar.component';
+import { ProductsComponent } from './products/products.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './bars/header/header.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    ProductsCategoriesNavBarComponent,
-    OrdTabCategoryComponent,
-    PhonesCategoryComponent,
-    HomeComponent,
-    FooterComponent,
-    StockageCategoryComponent,
-    ImpCopCategoryComponent,
-    AccessCategoryComponent,
     ShoppingCartComponent,
+    CategoriesBarComponent,
+    ProductsComponent,
+    HeaderComponent,
+    FooterComponent,
+    CategoriesBarComponent,
+    ProductsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

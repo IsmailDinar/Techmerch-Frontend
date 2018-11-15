@@ -1,6 +1,4 @@
-.carousel-indicators{
-  bottom: -50px;
-}
+
 .carousel-indicators li{
   background-color: #0099CC;
   border-radius: 12px;
@@ -12,6 +10,6 @@
   height: 18px;
   background-color:#0099CC;
 }
-section{
+div .carousel{
   border: 1px solid #e0e0e0;
 }

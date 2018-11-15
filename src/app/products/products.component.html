@@ -1,0 +1,102 @@
+<div class="container">
+  <section class="row top-rated  mb-3">
+    <div class="col-lg-4">
+      <ul class="list-group">
+        <li class="list-group-item active">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
+    </div>
+    <div id="carouselExampleIndicators" class=" col-lg-8 carousel slide pb-5" data-ride="carousel">
+      <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
+        <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="btn  btn-primary rounded-circle float ml-1" href="#carouselExampleIndicators" role="button"
+          data-slide="next">
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active float"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="float"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="float"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3" class="float"></li>
+      </ol>
+      <div class="carousel-inner mb-2 h-100">
+        <ng-container *ngFor="let p of products; index as i; first as isFirst">
+          <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
+            <div class="row">
+              <div *ngFor="let prod of products | slice:i:(i+2)" class="col-lg-4">
+                <div class="card float h-100 ml-2 mr-2">
+                  <img class="card-img-top" src="{{prod.productImgurl}}" alt="Card image cap">
+                  <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title">{{prod.productName}}</h5>
+                    <h4 class="card-title">${{prod.productPrice}}</h4>
+                    <a href="#" class="btn btn-primary btn-float btn-block mt-auto ">Description</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+  <div class="row mb-2">
+    <ng-container *ngFor="let p of products; index as i">
+      <div class="col-md-6 col-lg-3 mb-4 cards">
+        <div class="card float  h-100">
+          <img class="card-img-top" [src]="p.productImgurl" alt="Card image cap">
+          <div class="card-body text-center d-flex flex-column ">
+            <h5 class="card-title">{{p.productName}}</h5>
+            <h4 id="product-price">${{p.productPrice}}</h4>
+            <a href="#" class="btn btn-primary btn-float btn-block mt-auto " (click)="selectedProduct = p" data-toggle="modal"
+              data-target="#card">Description</a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(i + 1) % 4 === 0" class="w-100"></div>
+    </ng-container>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="modal fade" id="card" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> {{selectedProduct?.productName}} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="card-img-top" src="{{selectedProduct?.productImgurl}}" alt="Card image cap">
+        <p class="card-text text-justify">{{selectedProduct?.productDescription}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-float">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>

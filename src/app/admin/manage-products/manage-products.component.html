@@ -1,0 +1,165 @@
+
+<div class="pt-3 justify-content-center">
+      <div class="text-center pb-3">
+          <a href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#add">Add a New Product
+            <i class="fa fa-plus-square ml-2"></i></a>
+        </div>
+<table class="table table-bordered">
+  <thead>
+    <tr class="text-center text-justify">
+      <th class="align-middle" scope="col">Product Id</th>
+      <th class="align-middle" scope="col">Product Name</th>
+      <th class="align-middle" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngFor= "let p of products">
+      <th class="align-middle" scope="row">{{p.productId}}</th>
+      <td class="align-middle">{{p.productName}}</td>
+      <td class="align-middle">
+        <a class="text-success" (click)="selectedProduct = p" data-toggle="modal" data-target="#update"><i class="fa fa-refresh mr-3"></i></a>
+        <a class="text-danger" (click)="selectedProduct = p" data-toggle="modal" data-target="#delete"><i class="fa fa-times ml-2"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- update product -->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalCenterTitle">Update Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form>
+              <div class="form-group row">
+                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName" value="{{selectedProduct?.productName}}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10">
+                    <select class="custom-select">
+                        <option selected>{{selectedProduct?.productCategory.categoryName}}</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control text-truncate" id="inputDescription" value="{{selectedProduct?.productDescription}}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+                <div class="input-group mb-2 col-sm-10">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                  <input type="text" class="form-control" id="inputPrice" value="{{selectedProduct?.productPrice}}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputImgurl" class="col-sm-2 col-form-label">Imgurl</label>
+                <div class="col-sm-10">
+                  <input type="url" class="form-control" id="inputImgurl" value="{{selectedProduct?.productImgurl}}">
+                </div>
+              </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add product -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="addModalTitle">Add Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group row">
+                  <label for="inputName" class="col-sm-2 col-form-label">Title</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Title">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                  <div class="col-sm-10">
+                      <select class="custom-select">
+                          <option selected>Choose a category</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputDescription" placeholder="Description">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+                  <div class="input-group mb-2 col-sm-10">
+                      <div class="input-group-prepend">
+                          <div class="input-group-text">$</div>
+                        </div>
+                    <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputImgurl" class="col-sm-2 col-form-label">Imgurl</label>
+                  <div class="col-sm-10">
+                    <input type="url" class="form-control" id="inputImgurl" placeholder="Imgurl">
+                  </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addProduct()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Delete Modal -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalCenterTitle">Delete Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row">
+        <div class="pr-2 pl-4"><i class="fa fa-exclamation-triangle fa-3x text-danger"></i></div>
+        <div class="pl-4" >
+        <p><strong class="text-justify">Are you sure you want to delete this product !<br>This process cannot be undone</strong></p>
+      </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button"  class="btn btn-primary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

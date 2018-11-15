@@ -1,26 +1,20 @@
-import { AccessCategoryComponent } from './prodCategory/access-category/access-category.component';
-import { ImpCopCategoryComponent } from './prodCategory/imp-cop-category/imp-cop-category.component';
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import {  RouterModule, Routes } from '@angular/router';
 
-import { PhonesCategoryComponent } from './prodCategory/phones-category/phones-category.component';
-import { OrdTabCategoryComponent } from './prodCategory/ord-tab-category/ord-tab-category.component';
-import { HomeComponent } from './home/home.component';
-import { StockageCategoryComponent } from './prodCategory/stockage-category/stockage-category.component';
+
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
-  { path: 'ordinateurs&tablettes', component: OrdTabCategoryComponent },
-  { path: 'phones', component: PhonesCategoryComponent },
+  { path: 'products/:categoryId', component: ProductsComponent },
+  { path: 'cart', component: ShoppingCartComponent },
   { path: '', component: HomeComponent },
-  { path: 'stockage', component: StockageCategoryComponent },
-  { path: 'impression&copieurs', component: ImpCopCategoryComponent },
-  { path: 'accessories', component: AccessCategoryComponent },
-  { path: 'shoppingcart', component: ShoppingCartComponent }
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
