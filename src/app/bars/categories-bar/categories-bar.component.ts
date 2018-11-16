@@ -17,7 +17,6 @@ export class CategoriesBarComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getCategoeies().subscribe((categories: Category[]) => {this.categories = categories;
-      console.log(categories);
     },
     (error) => {
       console.log(error);

@@ -1,10 +1,10 @@
 
 <div class="pt-3 justify-content-center">
       <div class="text-center pb-3">
-          <a href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#add">Add a New Product
+          <a href="" class="btn btn-info btn-sm float" data-toggle="modal" data-target="#add">Add a New Product
             <i class="fa fa-plus-square ml-2"></i></a>
         </div>
-<table class="table table-bordered">
+<table class="table table-bordered shadow">
   <thead>
     <tr class="text-center text-justify">
       <th class="align-middle" scope="col">Product Id</th>
@@ -47,9 +47,9 @@
                 <div class="col-sm-10">
                     <select class="custom-select">
                         <option selected>{{selectedProduct?.productCategory.categoryName}}</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <ng-container *ngFor="let c of categories; index as i">
+                        <option *ngIf="c.categoryId != selectedProduct?.productCategory.categoryId" value="{{c.categoryId}}">{{c.categoryName}}</option>
+                      </ng-container>
                       </select>
                 </div>
               </div>
@@ -93,49 +93,53 @@
           </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form (ngSubmit)="onSubmit()" #addForm="ngForm">
                 <div class="form-group row">
                   <label for="inputName" class="col-sm-2 col-form-label">Title</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Title">
+                    <input type="text" class="form-control" id="inputName" placeholder="Title" required [(ngModel)]="product.productName" name="productName" #title="ngModel">
                   </div>
                 </div>
+                <div [hidden]="title.valid || title.pristine" class="row mt-1 ml-2 mr-2 alert alert-danger justify-content-center">Title is required</div>
                 <div class="form-group row">
                   <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
                   <div class="col-sm-10">
-                      <select class="custom-select">
-                          <option selected>Choose a category</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                      <select class="custom-select" required [(ngModel)]="product.productCategory" name="productCategory" #category="ngModel">
+                          <option value="null" disabled selected hidden>Choose a category</option>
+                              <option *ngFor="let c of categories" [ngValue]="c">{{c.categoryName}}</option>
                         </select>
                   </div>
                 </div>
+                <div [hidden]="category.valid || category.pristine" class="row mt-1 ml-2 mr-2 alert alert-danger justify-content-center">Category is required</div>
                 <div class="form-group row">
                   <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputDescription" placeholder="Description">
-                  </div>
+                      <input type="text" class="form-control" id="inputDescription" placeholder="Description" required [(ngModel)]="product.productDescription" name="productDescription" #description="ngModel">
+                    </div>
                 </div>
+                <div [hidden]="description.valid || description.pristine" class="row mt-1 ml-2 mr-2 alert alert-danger justify-content-center">Description is required</div>
                 <div class="form-group row">
                   <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
-                  <div class="input-group mb-2 col-sm-10">
+                  <div class="input-group col-sm-10">
                       <div class="input-group-prepend">
                           <div class="input-group-text">$</div>
                         </div>
-                    <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                    <input type="text" class="form-control" id="inputPrice" placeholder="Price" required [(ngModel)]="product.productPrice" pattern="^[1-9]+[0-9]*$" name="productPrice" #price="ngModel">
                   </div>
                 </div>
+                <div [hidden]="price.valid || price.pristine" class="row mt-1 ml-2 mr-2 alert alert-danger justify-content-center">Price is required</div>
                 <div class="form-group row">
                   <label for="inputImgurl" class="col-sm-2 col-form-label">Imgurl</label>
                   <div class="col-sm-10">
-                    <input type="url" class="form-control" id="inputImgurl" placeholder="Imgurl">
+                    <input type="url" class="form-control" id="inputImgurl" placeholder="Imgurl" required [(ngModel)]="product.productImgurl" name="productImgurl" #image="ngModel">
                   </div>
                 </div>
+                <div [hidden]="image.valid || image.pristine" class="row mt-1 ml-2 mr-2 alert alert-danger justify-content-center">Image is required</div>
               </form>
         </div>
+        <div [hidden]="!submitted">izhfiozefh</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="addProduct()">Add</button>
+          <button type="button" class="btn btn-primary" [disabled]="!addForm.form.valid" (click)="addProduct(); addForm.reset()">Add</button>
         </div>
       </div>
     </div>

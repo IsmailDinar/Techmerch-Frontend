@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  throwError, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../model/product';
 @Injectable({
@@ -8,6 +8,11 @@ import { Product } from '../model/product';
 })
 export class ProductService {
   private baseUrl = 'http://localhost:8080/api-product';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
   private categoryId = new Subject<number>();
   currentCategoryId = this.categoryId.asObservable();
   constructor(private _http: HttpClient) { }
@@ -21,13 +26,13 @@ export class ProductService {
   }
   addProduct(product: Product) {
 
-    return this._http.post(this.baseUrl + '/add', JSON.stringify(product))
+    return this._http.post(this.baseUrl + '/add', JSON.stringify(product), this.httpOptions)
     .pipe(catchError(this.errorHandler));
   }
+  updateProduct(product: Product) {
 
-  changeCategory(categoryId: number) {
-    this.categoryId.next(categoryId);
-    console.log(categoryId);
+    return this._http.post(this.baseUrl + '/update/' + product.productId , JSON.stringify(product), this.httpOptions)
+    .pipe(catchError(this.errorHandler));
   }
   errorHandler(error: Response) {
     return throwError(error || 'Error');

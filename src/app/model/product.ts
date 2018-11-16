@@ -2,16 +2,14 @@ import { Category } from './category';
 
 export class Product {
 
-   productName: String;
-   productPrice: number;
-   productId: number;
-   productDescription: String;
-   productCategory: Category;
-   productImgurl: String;
+  public productId: number;
+  public productName: String;
+    public productPrice: number;
+    public productDescription: String;
+    public productCategory: Category;
+    public productImgurl: String;
+    public productRate?: number;
   constructor() {
-  }
-  public setProductName(value: String) {
-    this.productName = value;
   }
 
 

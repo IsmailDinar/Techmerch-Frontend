@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  public products: Product[];
+  public products: Product[] = [];
+  public topRatedProducts: Product[] = [];
   public selectedProduct: Product;
   private _categoryId: number;
   private subuscription: Subscription;
@@ -22,14 +23,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this._categoryId = params['categoryId'];
       this.productService.getProductsByCategory(this._categoryId).subscribe((products: Product[]) => {
         this.products = products;
-          console.log(products);
+        console.log(products);
+      },
+        (error) => {
+          console.log(error);
         },
-          (error) => {
-            console.log(error);
-          }
-        );
+        () => { this.topRatedProducts = this.products.sort((a, b) => {
+          return b.productRate - a.productRate;
+        });
+        console.log(this.topRatedProducts);
+        }
+      );
     });
-
   }
   ngOnDestroy() {
     if (this.subuscription !== undefined) {

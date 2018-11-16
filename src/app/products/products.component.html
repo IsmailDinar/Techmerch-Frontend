@@ -1,6 +1,7 @@
 <div class="container">
-  <section class="row top-rated  mb-3">
-    <div class="col-lg-4">
+  <section class="row  mb-3">
+    <div class="sub-categories col-lg-4">
+        <div class="title text-center"><h5>Subcatgories</h5></div>
       <ul class="list-group">
         <li class="list-group-item active">Cras justo odio</li>
         <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -9,49 +10,54 @@
         <li class="list-group-item">Vestibulum at eros</li>
       </ul>
     </div>
-    <div id="carouselExampleIndicators" class=" col-lg-8 carousel slide pb-5" data-ride="carousel">
-      <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
-        <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <i class="fa fa-chevron-left"></i>
-        </a>
-        <a class="btn  btn-primary rounded-circle float ml-1" href="#carouselExampleIndicators" role="button"
-          data-slide="next">
-          <i class="fa fa-chevron-right"></i>
-        </a>
-      </div>
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active float"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="float"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="float"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3" class="float"></li>
-      </ol>
-      <div class="carousel-inner mb-2 h-100">
-        <ng-container *ngFor="let p of products; index as i; first as isFirst">
-          <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
-            <div class="row">
-              <div *ngFor="let prod of products | slice:i:(i+2)" class="col-lg-4">
-                <div class="card float h-100 ml-2 mr-2">
-                  <img class="card-img-top" src="{{prod.productImgurl}}" alt="Card image cap">
-                  <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title">{{prod.productName}}</h5>
-                    <h4 class="card-title">${{prod.productPrice}}</h4>
-                    <a href="#" class="btn btn-primary btn-float btn-block mt-auto ">Description</a>
+    <div class="top-rated col-lg-8 ">
+      <div class="title text-center"><h5>Top Rated</h5></div>
+      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 " data-ride="carousel">
+        <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
+          <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button"
+            data-slide="prev">
+            <i class="fa fa-chevron-left"></i>
+          </a>
+          <a class="btn  btn-primary rounded-circle float ml-1" href="#carouselExampleIndicators" role="button"
+            data-slide="next">
+            <i class="fa fa-chevron-right"></i>
+          </a>
+        </div>
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active float"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1" class="float"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2" class="float"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3" class="float"></li>
+        </ol>
+        <div class="carousel-inner mb-2 h-100">
+          <ng-container *ngFor="let p of topRatedProducts | slice:0:7; index as i; first as isFirst">
+            <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
+              <div class="row">
+                <div *ngFor="let prod of topRatedProducts | slice:i:(i+2)" class="col-lg-6">
+                  <div class="card float h-100 ml-4 mr-4">
+                    <img class="card-img-top" src="{{prod.productImgurl}}" alt="Card image cap">
+                    <div class="card-body text-center d-flex flex-column">
+                      <h5 class="card-title text-truncate">{{prod.productName}}</h5>
+                      <h4 class="card-title">${{prod.productPrice}}</h4>
+                      <a href="#" class="btn btn-primary btn-float btn-block mt-auto " (click)="selectedProduct = p"
+                        data-toggle="modal" data-target="#card">Description</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ng-container>
+          </ng-container>
+        </div>
       </div>
     </div>
   </section>
-  <div class="row mb-2">
+  <div class="row mb-2 mt-5">
     <ng-container *ngFor="let p of products; index as i">
       <div class="col-md-6 col-lg-3 mb-4 cards">
         <div class="card float  h-100">
           <img class="card-img-top" [src]="p.productImgurl" alt="Card image cap">
           <div class="card-body text-center d-flex flex-column ">
-            <h5 class="card-title">{{p.productName}}</h5>
+            <h5 class="card-title text-truncate">{{p.productName}}</h5>
             <h4 id="product-price">${{p.productPrice}}</h4>
             <a href="#" class="btn btn-primary btn-float btn-block mt-auto " (click)="selectedProduct = p" data-toggle="modal"
               data-target="#card">Description</a>
