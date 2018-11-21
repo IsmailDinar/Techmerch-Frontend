@@ -1,9 +1,9 @@
-import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public selectedProduct: Product;
   private _categoryId: number;
   private subuscription: Subscription;
-  constructor(private productService: ProductService, private cookieService: CookieService, private _activatedRoute: ActivatedRoute) { }
+  constructor(private productService: ProductService, private cartService: CartService, private _activatedRoute: ActivatedRoute) { }
   ngOnInit() {
     this.subuscription = this._activatedRoute.params.subscribe(params => {
       this._categoryId = params['categoryId'];
@@ -37,19 +37,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
   addToCart(product: Product, quantity: number) {
-    const expires = new Date();
-    expires.setDate(expires.getDate() + 10);
-    if (this.cookieService.check('cart')) {
-      let value = this.cookieService.get('cart');
-      if (value.includes(JSON.stringify(product))) {
-        return;
-      } else {
-        value += ';' + JSON.stringify(product);
-      this.cookieService.set('cart', value, expires);
-      }
-    } else {
-             this.cookieService.set('cart', JSON.stringify(product), expires);
-           }
+    this.cartService.addItem(product, quantity);
+    this.cartService.updateNumberOfItems(this.cartService.getNumberOfItems());
   }
   ngOnDestroy() {
     if (this.subuscription !== undefined) {

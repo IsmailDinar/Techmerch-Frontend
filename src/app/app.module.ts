@@ -1,3 +1,4 @@
+import { CartService } from './services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './bars/footer/footer.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +30,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
