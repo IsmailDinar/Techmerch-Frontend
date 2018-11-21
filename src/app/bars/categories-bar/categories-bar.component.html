@@ -1,4 +1,4 @@
-<nav class="nav justify-content-center nav-tabs nav-stacked nav-float">
+<nav class="nav justify-content-center nav-tabs nav-stacked  nav-float">
   <ng-container *ngFor="let c of categories">
       <a class="nav-link float" [routerLink]="['/products', c.categoryId]" routerLinkActive="active current ">{{c.categoryName}}</a>
   </ng-container>

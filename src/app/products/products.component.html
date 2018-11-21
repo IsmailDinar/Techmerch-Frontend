@@ -101,7 +101,7 @@
         <p class="card-text text-justify">{{selectedProduct?.productDescription}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-float">Add to cart</button>
+        <button type="button" (click)="addToCart(selectedProduct,1)" class="btn btn-primary btn-float">Add to cart</button>
       </div>
     </div>
   </div>

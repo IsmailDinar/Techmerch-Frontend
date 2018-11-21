@@ -1,3 +1,44 @@
-<p>
-  shopping-cart works!
-</p>
+<div class="conatiner">
+  <ng-container *ngIf="!isEmpty; then cart else emptyCart" ></ng-container>
+  <ng-template #cart>
+<table id="cart" class="table ">
+    <thead>
+    <tr class="text-center">
+      <th style="width:50%">Product</th>
+      <th style="width:10%">Price</th>
+      <th style="width:8%">Quantity</th>
+      <th style="width:22%" class="text-center">Amount</th>
+      <th style="width:10%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td class="text-justify">
+        <div class="row">
+          <div class="col-sm-2"><img src="{{p.productImgurl}}" alt="..." class="img-fluid"/></div>
+          <div class="col-sm-10 my-auto">
+            <p>{{p.productName}}</p>
+          </div>
+        </div>
+      </td>
+      <td class="text-center align-middle">${{p.productPrice}}</td>
+      <td class="align-middle">
+        <input type="number" class="form-control text-center" value="1">
+      </td>
+      <td  class="text-center align-middle"></td>
+      <td class="align-middle">
+        <button (click)="removeItem(p)" class="btn btn-danger btn-sm btn-float rounded-circle"><i class="fa fa-trash-o"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</ng-template>
+<ng-template #emptyCart>
+  <div class="text-center">
+      <img src="./img/emptycart.png" alt="" class="img-fluid">
+      <h1>Ooops! No items in cart.</h1>
+      <h2>Keep shopping with us and grab exciting offers!</h2>
+      <a routerLink="/"  class="btn btn-primary btn-float">Continue shopping</a>
+  </div>
+</ng-template>
+</div>

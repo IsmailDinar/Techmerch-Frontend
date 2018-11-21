@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  throwError, Subject } from 'rxjs';
+import {  throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../model/product';
@@ -13,8 +13,6 @@ export class ProductService {
       'Content-Type':  'application/json',
     })
   };
-  private categoryId = new Subject<number>();
-  currentCategoryId = this.categoryId.asObservable();
   constructor(private _http: HttpClient) { }
   getProducts() {
     return this._http.get(this.baseUrl + '/products').
