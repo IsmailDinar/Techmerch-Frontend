@@ -1,9 +1,10 @@
+import { SubCategory } from './../model/sub-category';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartService } from '../services/cart.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-products',
@@ -14,13 +15,16 @@ import { CartService } from '../services/cart.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
+  public selectedSubC: number;
+  public subCategories: SubCategory[];
   public topRatedProducts: Product[] = [];
   public selectedProduct: Product;
   private _categoryId: number;
-  private subuscription: Subscription;
-  constructor(private productService: ProductService, private cartService: CartService, private _activatedRoute: ActivatedRoute) { }
+  private subuscription$ = new Subscription();
+  private productSubuscription$ = new  Subscription();
+  constructor(private productService: ProductService, private categoryService: CategoryService, private _activatedRoute: ActivatedRoute) { }
   ngOnInit() {
-    this.subuscription = this._activatedRoute.params.subscribe(params => {
+    this.subuscription$ = this._activatedRoute.params.subscribe(params => {
       this._categoryId = params['categoryId'];
       this.productService.getProductsByCategory(this._categoryId).subscribe((products: Product[]) => {
         this.products = products;
@@ -29,20 +33,26 @@ export class ProductsComponent implements OnInit, OnDestroy {
           console.log(error);
         },
         () => {
-        this.topRatedProducts = this.products.sort((a, b) => {
-          return b.productRate - a.productRate;
-        });
+          this.topRatedProducts = this.products.sort((a, b) => {
+            return b.productRate - a.productRate;
+          });
         }
       );
+      this.categoryService.getSubCategoriesByCategory(this._categoryId).subscribe((subCategories: SubCategory[]) => {
+        this.subCategories = subCategories;
+      });
     });
   }
-  addToCart(product: Product, quantity: number) {
-    this.cartService.addItem(product, quantity);
-    this.cartService.updateNumberOfItems(this.cartService.getNumberOfItems());
+  getProductsBySubCategory(subcategoryId: number) {
+    this.productService.getProductsBySubCategory(subcategoryId).subscribe((products: Product[]) => {
+      this.products = products;
+      this.topRatedProducts = this.products.sort((a, b) => {
+        return b.productRate - a.productRate;
+      });
+    });
   }
   ngOnDestroy() {
-    if (this.subuscription !== undefined) {
-      this.subuscription.unsubscribe();
-    }
+      this.productSubuscription$.unsubscribe();
+      this.subuscription$.unsubscribe();
   }
 }

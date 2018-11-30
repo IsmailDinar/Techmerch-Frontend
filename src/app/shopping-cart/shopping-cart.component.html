@@ -27,7 +27,7 @@
       </td>
       <td  class="text-center align-middle"></td>
       <td class="align-middle">
-        <button (click)="removeItem(p)" class="btn btn-danger btn-sm btn-float rounded-circle"><i class="fa fa-trash-o"></i></button>
+        <button (click)="removeItem(p.productId)" class="btn btn-danger btn-sm btn-float rounded-circle"><i class="fa fa-trash-o"></i></button>
       </td>
     </tr>
   </tbody>
@@ -38,7 +38,7 @@
       <img src="./img/emptycart.png" alt="" class="img-fluid">
       <h1>Ooops! No items in cart.</h1>
       <h2>Keep shopping with us and grab exciting offers!</h2>
-      <a routerLink="/"  class="btn btn-primary btn-float">Continue shopping</a>
+      <a routerLink="/"  class="btn btn-primary btn-float btn-rounded">Continue shopping</a>
   </div>
 </ng-template>
 </div>

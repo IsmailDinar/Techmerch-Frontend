@@ -1,3 +1,4 @@
+import { ProductComponent } from './product/product.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import {  RouterModule, Routes } from '@angular/router';
@@ -10,11 +11,12 @@ const routes: Routes = [
   { path: 'products/:categoryId', component: ProductsComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: '', component: HomeComponent },
+  { path: 'product/:productId', component: ProductComponent },
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

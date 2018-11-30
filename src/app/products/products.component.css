@@ -14,3 +14,13 @@
   border: 1px solid rgb(233, 227, 227);
   border-radius: 5px;
 }
+.rating {
+    color: #ffa000;
+    list-style-type: none;
+    padding: 0;
+}
+.list-group-item:hover{
+  background-color: deepskyblue !important;
+  color: white !important;
+  text-align: center;
+}

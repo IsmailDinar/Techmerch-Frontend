@@ -1,0 +1,13 @@
+.badge{
+  background-color: #ff3547;
+  border-radius: 2.5px;
+}
+.nav-tabs{
+  border: 0;
+}
+ .nav-link{
+  border-radius: 5px !important;
+}
+.dropdown-menu{
+  border:0;
+}

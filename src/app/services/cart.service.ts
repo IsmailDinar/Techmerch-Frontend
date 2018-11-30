@@ -1,3 +1,4 @@
+import { CartItem } from './../model/cart-item';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product';
@@ -10,39 +11,37 @@ export class CartService {
 
   private numberOfItems = new Subject<number>();
   numberOfItems$ = this.numberOfItems.asObservable();
-
   constructor(private cookieService: CookieService) { }
-  addItem(product: Product, quantity: number) {
+  addItem(productId: number, quantity: number) {
     const expires = new Date();
     expires.setDate(expires.getDate() + 10);
+    const cartItem = new CartItem(productId, quantity);
     if (this.cookieService.check('cart')) {
       let value = this.cookieService.get('cart');
-      if (value.includes(JSON.stringify(product))) {
+      if (value.includes(JSON.stringify(cartItem))) {
         return;
       } else {
-        value += ';' + JSON.stringify(product);
+        value += ';' + JSON.stringify(cartItem);
         this.cookieService.set('cart', value, expires);
       }
     } else {
-      this.cookieService.set('cart', JSON.stringify(product), expires);
+      this.cookieService.set('cart', JSON.stringify(cartItem), expires);
     }
   }
-  removeItem(product: Product) {
-    let str = this.cookieService.get('cart');
-    str = str.replace(JSON.stringify(product), '');
-    if (str.substr(str.length - 1) === ';') {
-      str = str.substring(0, str.length - 1);
+  removeItem(productId: number) {
+    const cartItems = this.getItems();
+    this.cookieService.delete('cart');
+    const str:  string[] = [];
+    for (let i = 0; i < cartItems.length ; i++) {
+        if (cartItems[i].productId === productId) {
+          cartItems.splice(i, 1);
+        }
     }
-    if (str.charAt(0) === ';') {
-      str = str.substring(1);
-    }
-    if (str.includes(';;')) {
-      str = str.replace(';;', ';');
-    }
-    if (str === '') {
-      this.cookieService.delete('cart');
-    } else {
-      this.cookieService.set('cart', str);
+    if (cartItems.length !== 0) {
+      for (let i = 0; i < cartItems.length ; i++) {
+        str[i] = JSON.stringify(cartItems[i]);
+      }
+      this.cookieService.set('cart', str.join(';'));
     }
   }
   getNumberOfItems(): number {
@@ -51,16 +50,16 @@ export class CartService {
       return (str.split(';').length);
     } else { return 0; }
   }
-  getItems(): Product[] {
-    const products: Product[] = [];
+  getItems(): CartItem[] {
+    const items: CartItem[] = [];
     if (this.cookieService.check('cart')) {
         const str = this.cookieService.get('cart');
         const cartItems =  str.split(';');
       for (let i = 0 ; i < cartItems.length ; i++) {
-        products.push(JSON.parse(cartItems[i]));
+        items.push(JSON.parse(cartItems[i]));
       }
       }
-      return products;
+      return items;
   }
   updateNumberOfItems(n: number) {
     this.numberOfItems.next(n);

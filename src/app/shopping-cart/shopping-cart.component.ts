@@ -1,5 +1,7 @@
+import { Subscription } from 'rxjs';
+import { ProductService } from './../services/product.service';
 import { Product } from 'src/app/model/product';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -7,23 +9,33 @@ import { CartService } from '../services/cart.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
+  public quantities: number [] = [];
+  private subscription = new Subscription();
   public isEmpty = true;
-  constructor(private cartService: CartService) { }
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit() {
     if (this.cartService.getNumberOfItems() !== 0 ) {
-      this.products = this.cartService.getItems();
+      const cartItems = this.cartService.getItems();
+      for (let i = 0; i < cartItems.length; i++) {
+        this.subscription.add(this.productService.getProductById(cartItems[i].productId).subscribe((product: Product) => {
+          this.products.push(product);
+        }));
+      }
       this.isEmpty = false;
     }
   }
-  removeItem(product: Product) {
-    this.cartService.removeItem(product);
+  removeItem(productId: number) {
+    console.log(productId);
+    this.cartService.removeItem(productId);
     this.cartService.updateNumberOfItems(this.cartService.getNumberOfItems());
     if (this.cartService.getNumberOfItems() === 0)  {
       this.isEmpty = true;
     }
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

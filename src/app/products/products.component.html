@@ -1,18 +1,20 @@
 <div class="container">
-  <section class="row  mb-3">
-    <div class="sub-categories col-lg-4">
-        <div class="title text-center"><h5>Subcatgories</h5></div>
+  <section class="row  mb-4">
+    <div class="sub-categories col-lg-4 my-auto">
+      <div class="title text-center">
+        <h5>Subcatgories</h5>
+      </div>
       <ul class="list-group">
-        <li class="list-group-item active">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Morbi leo risus</li>
-        <li class="list-group-item">Porta ac consectetur ac</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        <ng-container *ngFor="let s of subCategories; index as i ">
+            <li class="list-group-item hoverable" (click)="getProductsBySubCategory(s.subCategoryId); selectedSubC = i" [ngClass]="{active: selctedSubC === i}" >{{s.subCategoryName}}</li>
+        </ng-container>
       </ul>
     </div>
     <div class="top-rated col-lg-8 ">
-      <div class="title text-center"><h5>Top Rated</h5></div>
-      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 " data-ride="carousel">
+      <div class="title text-center">
+        <h5>Top Rated</h5>
+      </div>
+      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 shadow-sm" data-ride="carousel">
         <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
           <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button"
             data-slide="prev">
@@ -35,12 +37,19 @@
               <div class="row">
                 <div *ngFor="let prod of topRatedProducts | slice:i:(i+2)" class="col-lg-6">
                   <div class="card float h-100 ml-4 mr-4">
-                    <img class="card-img-top" src="{{prod.productImgurl}}" alt="Card image cap">
+                    <img class="card-img-top p-2" src="{{prod.productImgurl}}" alt="Card image cap">
                     <div class="card-body text-center d-flex flex-column">
                       <h5 class="card-title text-truncate">{{prod.productName}}</h5>
                       <h4 class="card-title">${{prod.productPrice}}</h4>
-                      <a href="#" class="btn btn-primary btn-float btn-block mt-auto " (click)="selectedProduct = prod"
-                        data-toggle="modal" data-target="#card">Description</a>
+                      <ul class="rating">
+                        <li class="d-inline"><i class="fa fa-star"></i></li>
+                        <li class="d-inline"><i class="fa fa-star"></i></li>
+                        <li class="d-inline"><i class="fa fa-star"></i></li>
+                        <li class="d-inline"><i class="fa fa-star"></i></li>
+                        <li class="d-inline"><i class="fa fa-star-o"></i></li>
+                      </ul>
+
+                      <a href="#" class="btn btn-primary btn-float btn-block mt-auto " [routerLink]="['/product', prod.productId]">More details</a>
                     </div>
                   </div>
                 </div>
@@ -55,12 +64,18 @@
     <ng-container *ngFor="let p of products; index as i">
       <div class="col-md-6 col-lg-3 mb-4 cards">
         <div class="card float  h-100">
-          <img class="card-img-top" [src]="p.productImgurl" alt="Card image cap">
+          <img class="card-img-top p-2" [src]="p.productImgurl" alt="Card image cap">
           <div class="card-body text-center d-flex flex-column ">
             <h5 class="card-title text-truncate">{{p.productName}}</h5>
             <h4 id="product-price">${{p.productPrice}}</h4>
-            <a href="#" class="btn btn-primary btn-float btn-block mt-auto " (click)="selectedProduct = p" data-toggle="modal"
-              data-target="#card">Description</a>
+            <ul class="rating">
+                <li class="d-inline"><i class="fa fa-star"></i></li>
+                <li class="d-inline"><i class="fa fa-star"></i></li>
+                <li class="d-inline"><i class="fa fa-star"></i></li>
+                <li class="d-inline"><i class="fa fa-star"></i></li>
+                <li class="d-inline"><i class="fa fa-star-o"></i></li>
+              </ul>
+            <a href="#" class="btn btn-primary btn-float btn-block mt-auto " [routerLink]="['/product', p.productId]" >More details</a>
           </div>
         </div>
       </div>
@@ -86,23 +101,4 @@
       </li>
     </ul>
   </nav>
-</div>
-<div class="modal fade" id="card" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"> {{selectedProduct?.productName}} </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img class="card-img-top" src="{{selectedProduct?.productImgurl}}" alt="Card image cap">
-        <p class="card-text text-justify">{{selectedProduct?.productDescription}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="addToCart(selectedProduct,1)" class="btn btn-primary btn-float">Add to cart</button>
-      </div>
-    </div>
-  </div>
 </div>

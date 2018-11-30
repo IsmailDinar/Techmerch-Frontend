@@ -1,12 +1,9 @@
 export class Category {
   private _categoryId: number;
   private _categoryName: String;
+  private _isSubCategory: number;
 
-  constructor () {
-    this._categoryId = 1;
-    this._categoryName = 'ordnateurs';
 
-  }
   public get categoryId(): number {
     return this._categoryId;
   }
@@ -14,6 +11,9 @@ export class Category {
 
   public get categoryName(): String {
     return this._categoryName;
+  }
+  public get isSubCategory(): number {
+    return this._isSubCategory;
   }
 
 
@@ -24,6 +24,9 @@ export class Category {
 
   public set categoryName(value: String) {
     this._categoryName = value;
+  }
+  public set isSubCategory(value: number) {
+    this._isSubCategory = value;
   }
 
 
