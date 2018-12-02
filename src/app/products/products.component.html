@@ -14,7 +14,7 @@
       <div class="title text-center">
         <h5>Top Rated</h5>
       </div>
-      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 " data-ride="carousel">
+      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-3" data-ride="carousel">
         <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
           <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button"
             data-slide="prev">
@@ -36,11 +36,30 @@
             <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
               <div class="row">
                 <div *ngFor="let prod of topRatedProducts | slice:i:(i+2)" class="col-lg-6">
-                  <div class="card float h-100 ml-4 mr-4">
+                  <div class="card float  my-1 mx-4">
                     <img class="card-img-top p-2" src="{{prod.productImgurl}}" alt="Card image cap">
                     <div class="card-body text-center d-flex flex-column">
                       <h5 class="card-title text-truncate">{{prod.productName}}</h5>
-                      <h4 class="card-title">${{prod.productPrice}}</h4>
+                      <ng-container [ngSwitch]="prod?.productDiscount >= 0">
+                          <div *ngSwitchCase=" prod?.productDiscount > 0 &&  100 > prod?.productDiscount" class="d-flex flex-row justify-content-center">
+                              <h5 class="mr-2 card-title text-secondary"><s>${{prod?.productPrice}}</s></h5>
+                              <h4 class=" card-title text-left text-danger">${{setDiscount(prod)}}</h4>
+                          </div>
+                          <div *ngSwitchCase=" prod?.productDiscount === 0" class="text-center">
+                              <h4 class="card-title text-danger">${{prod?.productPrice}}</h4>
+                          </div>
+                          <div *ngSwitchCase=" prod?.productDiscount === 100" class="d-flex flex-row justify-content-center">
+                              <h5 class="mr-2 card-title text-secondary"><s>${{prod?.productPrice}}</s></h5>
+                              <h4 class=" card-title text-left text-success">Free</h4>
+                          </div>
+                      </ng-container>
+                      <ng-container *ngIf="prod.productAvailability ; then instock else outofstock"></ng-container>
+                      <ng-template #instock>
+                        <h5 class="text-success"><i class="fa fa-check mr-1"></i>In stock</h5>
+                      </ng-template>
+                      <ng-template #outofstock>
+                        <h5 class="text-danger"><i class="fa fa-times mr-1"></i>Out of stock</h5>
+                      </ng-template>
                       <ul class="rating">
                         <li class="d-inline"><i class="fa fa-star"></i></li>
                         <li class="d-inline"><i class="fa fa-star"></i></li>
@@ -66,7 +85,27 @@
           <img class="card-img-top p-2" [src]="p.productImgurl" alt="Card image cap">
           <div class="card-body text-center d-flex flex-column ">
             <h5 class="card-title text-truncate">{{p.productName}}</h5>
-            <h4 id="product-price">${{p.productPrice}}</h4>
+            <ng-container [ngSwitch]="p?.productDiscount >= 0">
+                <div *ngSwitchCase=" p?.productDiscount > 0 &&  100 > p?.productDiscount" class="d-flex flex-row justify-content-center">
+                    <h5 class="mr-2 card-title text-secondary"><s>${{p?.productPrice}}</s></h5>
+                    <h4 class=" card-title text-left text-danger">${{setDiscount(p)}}</h4>
+                </div>
+                <div *ngSwitchCase=" p?.productDiscount === 0" class="text-center">
+                    <h4 class="card-title text-danger">${{p?.productPrice}}</h4>
+                </div>
+                <div *ngSwitchCase=" p?.productDiscount === 100" class="d-flex flex-row justify-content-center">
+                    <h5 class="mr-2 card-title text-secondary"><s>${{p?.productPrice}}</s></h5>
+                    <h4 class=" card-title text-left text-success">Free</h4>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="p.productAvailability ; then instock else outofstock"></ng-container>
+            <ng-template #instock>
+              <h5 class="text-success"><i class="fa fa-check mr-1"></i>In stock</h5>
+            </ng-template>
+            <ng-template #outofstock>
+                <h5 class="text-danger"><i class="fa fa-times mr-1"></i>Out of stock</h5>
+            </ng-template>
+
             <ul class="rating">
                 <li class="d-inline"><i class="fa fa-star"></i></li>
                 <li class="d-inline"><i class="fa fa-star"></i></li>

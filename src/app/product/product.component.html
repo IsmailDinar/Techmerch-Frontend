@@ -1,11 +1,37 @@
 <div class="card float mb-4">
+
   <div class="row mt-5">
     <div class="col-lg-6">
-      <img  *ngIf="_product" class="img-fluid px-4" [src]="_product.productImgurl" alt="">
+      <img  *ngIf="_product" class="img-fluid px-4" [src]="_product?.productImgurl" alt="">
     </div>
     <div class="col-lg-5 mx-1 pt-4">
       <h2><strong>{{_product?.productName}}</strong></h2>
-      <h3 class="text-danger">${{_product?.productPrice}}</h3>
+      <div class="row">
+          <div class="col-7 text-left">
+            <ng-container [ngSwitch]="_product?.productDiscount >= 0">
+              <div *ngSwitchCase=" _product?.productDiscount > 0 &&  100 > _product?.productDiscount" class="d-flex flex-row">
+                  <h5 class="mr-2 card-title text-secondary"><s>${{_product?.productPrice}}</s></h5>
+                  <h4 class=" card-title text-left text-danger">${{setDiscount(_product)}}</h4>
+              </div>
+              <div *ngSwitchCase=" _product?.productDiscount === 0" class="d-flex flex-row">
+                  <h4 class="card-title text-danger">${{_product?.productPrice}}</h4>
+              </div>
+              <div *ngSwitchCase=" _product?.productDiscount === 100" class="d-flex flex-row">
+                  <h5 class="mr-2 card-title text-secondary"><s>${{_product?.productPrice}}</s></h5>
+                  <h4 class=" card-title text-left text-success">Free</h4>
+              </div>
+          </ng-container>
+          </div>
+          <div class="col-5">
+              <ng-container *ngIf="_product?.productAvailability ; then instock else outofstock" ></ng-container>
+            <ng-template #instock>
+                <h5 class="text-success"><i class="fa fa-check mr-1"></i>In stock</h5>
+            </ng-template>
+            <ng-template #outofstock>
+                <h5 class="text-danger"><i class="fa fa-times mr-1"></i>Out of stock</h5>
+            </ng-template>
+          </div>
+        </div>
       <div class="mt-4">
         <p class="text-justify">{{_product?.productDescription}}</p>
       </div>

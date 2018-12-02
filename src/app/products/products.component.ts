@@ -49,6 +49,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
     }));
   }
+  setDiscount(product: Product): number {
+    return Math.round(product.productPrice * (1 - (product.productDiscount / 100)));
+  }
   ngOnDestroy() {
       this.productSubuscription$.unsubscribe();
       this.subuscription$.unsubscribe();

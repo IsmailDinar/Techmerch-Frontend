@@ -12,6 +12,7 @@ export class Product {
   public productRate?: number;
   public productAvailability: boolean;
   public productSubCategory: SubCategory;
+  public productDiscount: number;
   constructor() {
   }
 

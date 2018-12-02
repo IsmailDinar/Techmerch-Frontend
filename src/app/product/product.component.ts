@@ -13,7 +13,6 @@ import { Order } from '../model/order';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   private subuscription$ = new Subscription();
-  private productSubuscription$: Subscription;
   private _productId: number;
   public _product: Product;
   constructor(private productService: ProductService, private cartService: CartService, private _activatedRoute: ActivatedRoute) { }
@@ -29,6 +28,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   addToCart(productId: number, quantity: number) {
     this.cartService.addItem(productId, quantity);
     this.cartService.updateNumberOfItems(this.cartService.getNumberOfItems());
+  }
+  setDiscount(product: Product): number {
+    return Math.round(product.productPrice * (1 - (product.productDiscount / 100)));
   }
   ngOnDestroy() {
       this.subuscription$.unsubscribe();
