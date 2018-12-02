@@ -4,9 +4,9 @@
       <div class="title text-center">
         <h5>Subcatgories</h5>
       </div>
-      <ul class="list-group">
+      <ul class="list-group nohoverfloat rounded">
         <ng-container *ngFor="let s of subCategories; index as i ">
-            <li class="list-group-item hoverable" (click)="getProductsBySubCategory(s.subCategoryId); selectedSubC = i" [ngClass]="{active: selctedSubC === i}" >{{s.subCategoryName}}</li>
+            <li id="subCategories" class="list-group-item hoverable" (click)="getProductsBySubCategory(s.subCategoryId); isActive = s.subCategoryId" [ngClass]="{liactive: isActive === s.subCategoryId}" >{{s.subCategoryName}}</li>
         </ng-container>
       </ul>
     </div>
@@ -14,7 +14,7 @@
       <div class="title text-center">
         <h5>Top Rated</h5>
       </div>
-      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 shadow-sm" data-ride="carousel">
+      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-5 " data-ride="carousel">
         <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
           <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button"
             data-slide="prev">
@@ -48,7 +48,6 @@
                         <li class="d-inline"><i class="fa fa-star"></i></li>
                         <li class="d-inline"><i class="fa fa-star-o"></i></li>
                       </ul>
-
                       <a href="#" class="btn btn-primary btn-float btn-block mt-auto " [routerLink]="['/product', prod.productId]">More details</a>
                     </div>
                   </div>

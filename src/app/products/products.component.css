@@ -24,3 +24,14 @@
   color: white !important;
   text-align: center;
 }
+.liactive {
+  background-color: deepskyblue !important;
+  color: white !important;
+  text-align: center;
+}
+/* #carouselExampleIndicators{
+  background-color: #f5f5f5;
+} */
+.card{
+  background-color: #fafafa;
+}

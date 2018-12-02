@@ -19,21 +19,28 @@ export class ProductService {
     return this._http.get(this.baseUrl + '/products', this.httpOptions).
     pipe(catchError(this.errorHandler));
   }
+
   getProductById(productId: number) {
     return this._http.get(this.baseUrl + '/product/' + productId, this.httpOptions);
   }
+
   getProductsByCategory(categoryId: number) {
     return this._http.get(this.baseUrl + '/products/' + categoryId, this.httpOptions).
     pipe(catchError(this.errorHandler));
   }
-  addProduct(product: Product) {
 
+  addProduct(product: Product) {
     return this._http.post(this.baseUrl + '/addProduct', JSON.stringify(product), this.httpOptions)
     .pipe(catchError(this.errorHandler));
   }
-  updateProduct(product: Product) {
 
+  updateProduct(product: Product) {
     return this._http.post(this.baseUrl + '/updateProduct/' + product.productId , JSON.stringify(product), this.httpOptions)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  deleteProduct(productId: number) {
+    return this._http.delete(this.baseUrl  + '/deleteProduct/' + productId , this.httpOptions)
     .pipe(catchError(this.errorHandler));
   }
 
@@ -41,6 +48,7 @@ export class ProductService {
     return this._http.get(this.baseUrl + '/scproducts/' + subcategoryId, this.httpOptions)
     .pipe(catchError(this.errorHandler));
   }
+
   errorHandler(error: Response) {
     return throwError(error || 'Error');
   }

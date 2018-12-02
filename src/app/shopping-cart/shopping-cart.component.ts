@@ -18,18 +18,22 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.cartService.getNumberOfItems() !== 0 ) {
-      const cartItems = this.cartService.getItems();
+      this.getItems();
+      this.isEmpty = false;
+    }
+  }
+  getItems() {
+    const cartItems = this.cartService.getItems();
       for (let i = 0; i < cartItems.length; i++) {
         this.subscription.add(this.productService.getProductById(cartItems[i].productId).subscribe((product: Product) => {
           this.products.push(product);
         }));
       }
-      this.isEmpty = false;
-    }
   }
   removeItem(productId: number) {
-    console.log(productId);
     this.cartService.removeItem(productId);
+    this.products = [];
+    this.getItems();
     this.cartService.updateNumberOfItems(this.cartService.getNumberOfItems());
     if (this.cartService.getNumberOfItems() === 0)  {
       this.isEmpty = true;

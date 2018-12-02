@@ -15,7 +15,7 @@ import { CategoryService } from '../services/category.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
-  public selectedSubC: number;
+  public isActive: number;
   public subCategories: SubCategory[];
   public topRatedProducts: Product[] = [];
   public selectedProduct: Product;
@@ -28,15 +28,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this._categoryId = params['categoryId'];
       this.productService.getProductsByCategory(this._categoryId).subscribe((products: Product[]) => {
         this.products = products;
+        this.topRatedProducts = this.products.sort((a, b) => {
+          return b.productRate - a.productRate;
+        });
       },
         (error) => {
           console.log(error);
         },
-        () => {
-          this.topRatedProducts = this.products.sort((a, b) => {
-            return b.productRate - a.productRate;
-          });
-        }
       );
       this.categoryService.getSubCategoriesByCategory(this._categoryId).subscribe((subCategories: SubCategory[]) => {
         this.subCategories = subCategories;
@@ -44,12 +42,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
   getProductsBySubCategory(subcategoryId: number) {
-    this.productService.getProductsBySubCategory(subcategoryId).subscribe((products: Product[]) => {
+    this.productSubuscription$.add(this.productService.getProductsBySubCategory(subcategoryId).subscribe((products: Product[]) => {
       this.products = products;
       this.topRatedProducts = this.products.sort((a, b) => {
         return b.productRate - a.productRate;
       });
-    });
+    }));
   }
   ngOnDestroy() {
       this.productSubuscription$.unsubscribe();
