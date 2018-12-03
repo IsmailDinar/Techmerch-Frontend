@@ -1,17 +1,12 @@
-.carousel-indicators{
-  bottom: -50px;
+.search{
+  border-radius: 10rem 0 0 10rem !important;
 }
-.carousel-indicators li{
-  background-color: #0099CC;
-  border-radius: 12px;
-  width: 12px;
-  height: 12px;
+.input-group{
+  border-radius: 10rem !important;
 }
-.carousel-indicators .active{
-  width: 18px;
-  height: 18px;
-  background-color:#0099CC;
-}
-section{
-  border: 1px solid #e0e0e0;
+.search-btn{
+  border-radius: 0 5rem 5rem 0 !important;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-left: none;
 }

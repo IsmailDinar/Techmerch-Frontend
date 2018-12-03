@@ -40,8 +40,8 @@ export class ManageProductsComponent implements OnInit, OnDestroy {
   }
   addProduct() {
     this.aproduct.productCategory = this.aproduct.productSubCategory.mainCategory;
-    console.log(this.aproduct);
     this.subscription$.add(this.productService.addProduct(this.aproduct).subscribe(data => console.log(data), error => console.log(error)));
+    this.products.push(this.aproduct);
   }
   updateProduct() {
     this.subscription$.add(this.productService.updateProduct(this.uproduct)

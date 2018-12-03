@@ -1,35 +1,45 @@
-<nav class="navbar navbar-expand-md text-primary bg-white shadow-sm fixed-top">
-    <a class="navbar-brand nav-link" routerLink="/" routerLinkActive="active current"><strong>Techmerch</strong></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-      <span><i class="fa fa-bars"></i></span>
-    </button>
-    <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
-      <ul class="navbar-nav pt-2 ml-auto pt-lg-0 ">
-        <li class="nav-item ">
-          <a class="nav-link" routerLink="/" routerLinkActive="active current"><i class="fa fa-envelope mr-1 ml-1"></i>Contact</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" routerLink="/cart" routerLinkActive="active current"><span class="badge nohoverfloat text-light">{{nbrofItems}}</span><i
-              class="fa fa-shopping-cart mr-1 ml-1"></i>Cart</a>
-        </li>
-        <li class="nav-item dropdown ">
-          <a class="nav-link" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-              class="fa fa-user mr-1"></i>My account</a>
-          <div class="dropdown-menu dropdown-menu-right  dropdown shadow" aria-labelledby="dropdownId">
-            <a class="dropdown-item " href="#">My account</a>
-            <a class="dropdown-item " href="#">My orders</a>
-            <a class="dropdown-item " routerLink="/admin/manage-products">Manage Products</a>
-            <a class="dropdown-item " href="#">Action 2</a>
-            <a class="dropdown-item " href="#">Logout</a>
+<nav class="navbar navbar-expand-lg text-primary bg-white shadow-sm sticky-top mb-5">
+  <div class="d-flex flex-column w-100">
+      <div class="d-flex flex-row w-100 justify-content-between align-items-center">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+          <span><i class="fa fa-bars"></i></span>
+        </button>
+        <a class="navbar-brand nav-link" routerLink="/" routerLinkActive="active current"><strong>Techmerch</strong></a>
+        <div class="input-group w-50 d-none d-lg-flex">
+            <input type="text" class="form-control search" placeholder="Search for products">
+            <div class="input-group-append">
+              <button class="btn search-btn" type="button"><span class="fa fa-search text-primary"></span></button>
+            </div>
+        </div>
+        <ul class="navbar-nav pt-2 pt-lg-0 d-flex w-25 flex-row justify-content-between">
+            <li class="nav-item ">
+              <a class="nav-link d-none d-sm-flex" routerLink="/" routerLinkActive="active current"><span class="d-flex flex-row align-items-center"><i class="fa fa-envelope mx-1"></i><span class="d-none d-lg-flex">Contact</span></span></a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" routerLink="/cart" routerLinkActive="active current"><span class="d-flex flex-row align-items-center"><span class="badge red-grad nohoverfloat text-light">{{nbrofItems}}</span><i class="fa fa-shopping-cart mx-1"></i><span class="d-none d-lg-flex">Cart</span></span></a>
+            </li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-flex flex-row align-items-center"><i class="fa fa-user mr-1"></i><span class="d-none d-lg-flex">My account</span></span></a>
+              <div class="dropdown-menu dropdown-menu-right  dropdown shadow" aria-labelledby="dropdownId">
+                <a class="dropdown-item " href="#">My account</a>
+                <a class="dropdown-item " href="#">My orders</a>
+                <a class="dropdown-item " routerLink="/admin/manage-products">Manage Products</a>
+                <a class="dropdown-item " href="#">Action 2</a>
+                <a class="dropdown-item " href="#">Logout</a>
 
-          </div>
-        </li>
-      </ul>
-      <nav class="nav  nav-tabs nav-stacked ">
-          <ng-container *ngFor="let c of categories">
+              </div>
+            </li>
+          </ul>
+      </div>
+      <div class="collapse navbar-collapse justify-content-center mt-1" id="navbarSupportedContent">
+          <nav class="nav  nav-tabs  ">
+            <ng-container *ngFor="let c of categories">
               <a class="nav-link hoverable" [routerLink]="['/products', c.categoryId]" routerLinkActive="active current nohoverfloat text-primary">{{c.categoryName}}</a>
-          </ng-container>
-      </nav>
-    </div>
+            </ng-container>
+          </nav>
+        </div>
+  </div>
+
+
 </nav>

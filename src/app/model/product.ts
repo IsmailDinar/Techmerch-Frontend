@@ -9,10 +9,10 @@ export class Product {
   public productDescription: String;
   public productCategory: Category;
   public productImgurl: String;
-  public productRate?: number;
-  public productAvailability: boolean;
+  public productRate = 0;
+  public productAvailability = true;
   public productSubCategory: SubCategory;
-  public productDiscount: number;
+  public productDiscount = 0;
   constructor() {
   }
 

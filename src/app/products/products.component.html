@@ -37,6 +37,7 @@
               <div class="row">
                 <div *ngFor="let prod of topRatedProducts | slice:i:(i+2)" class="col-lg-6">
                   <div class="card float  my-1 mx-4">
+                    <div *ngIf="prod?.productDiscount > 0" class="ribbon-left"><span>On sale</span></div>
                     <img class="card-img-top p-2" src="{{prod.productImgurl}}" alt="Card image cap">
                     <div class="card-body text-center d-flex flex-column">
                       <h5 class="card-title text-truncate">{{prod.productName}}</h5>
@@ -81,7 +82,8 @@
   <div class="row mb-2 mt-5">
     <ng-container *ngFor="let p of products; index as i">
       <div class="col-md-6 col-lg-3 mb-4 cards">
-        <div class="card float  h-100">
+        <div class="card float">
+            <div *ngIf="p?.productDiscount > 0" class="ribbon-left"><span>On sale</span></div>
           <img class="card-img-top p-2" [src]="p.productImgurl" alt="Card image cap">
           <div class="card-body text-center d-flex flex-column ">
             <h5 class="card-title text-truncate">{{p.productName}}</h5>
