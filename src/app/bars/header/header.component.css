@@ -10,6 +10,7 @@
 }
 .dropdown-menu{
   border:0;
+  position: absolute;
 }
 .search{
   border-radius: 10rem 0 0 10rem !important;

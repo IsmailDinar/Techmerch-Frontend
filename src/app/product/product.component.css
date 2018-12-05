@@ -1,3 +1,17 @@
 .card{
   background-color: #fafafa;
 }
+.btn-plus{
+  border-radius:1rem 0 0 1rem;
+}
+.btn-minus{
+  border-radius:0 1rem 1rem 0;
+}
+.btn-plus:focus, .btn-minus:focus{
+  outline: none;
+}
+.badge{
+  height: 1.5rem;
+  min-width: 1.5rem;
+  vertical-align: center;
+}

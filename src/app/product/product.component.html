@@ -4,7 +4,7 @@
     <div class="col-lg-6">
       <img  *ngIf="_product" class="img-fluid p-4" [src]="_product?.productImgurl" alt="">
     </div>
-    <div class="col-lg-5 mx-sm-3 pt-4">
+    <div class="col-lg-5 pt-4">
       <h2><strong>{{_product?.productName}}</strong></h2>
       <div class="row">
           <div class="col-7 text-left">
@@ -33,12 +33,19 @@
           </div>
         </div>
       <div class="mt-4">
-        <p class="text-justify">{{_product?.productDescription}}</p>
+        <p class="text-justify mx-xs-1">{{_product?.productDescription}}</p>
       </div>
-      <div class="row">
-        <div class="col-md-12 mb-1 mt-5 pb-1">
-          <button  class="btn btn-primary float-right float btn-rounded"  (click)="addToCart(_product.productId,1)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+      <div class="d-flex flex-row justify-content-end align-items-center">
+              <div class="input-group d-flex flex-row justify-content-end align-items-center mb-1 pb-1 quantity w-25">
+                <span class="badge red-grad nohoverfloat text-light mr-1">{{quantity}}</span>
+                <button class="btn-xs btn-primary text-center btn-float w-25 btn-plus" (click)="setQuantity('inc')">+</button>
+                <button class="btn-xs btn-primary text-center btn-float w-25 btn-minus" (click)="setQuantity('down')">-</button>
+              </div>
+
+        <div class="mb-1  pb-1 w-50 d-flex flex-row justify-content-end">
+          <button  class="btn btn-primary  float btn-rounded"  (click)="addToCart(_product.productId,1)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
         </div>
+
       </div>
     </div>
   </div>

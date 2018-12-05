@@ -1,0 +1,30 @@
+.search{
+  border-radius: 10rem 0 0 10rem ;
+}
+
+.input-group{
+  border-radius: 10rem ;
+}
+.search-btn{
+  border-radius: 0 5rem 5rem 0 ;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-left: none;
+}
+.searchbtn{
+  border-radius: 0 5rem 0 0;
+}
+.sugg{
+  border-radius: 0 0 1rem 1rem ;
+}
+.sugg-top{
+  border-radius: 1rem 1rem 0 0;
+}
+label{
+  margin: 0;
+}
+#drop{
+  position: absolute !important;
+  z-index: 1;
+  border-radius: 3rem ;
+}

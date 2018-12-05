@@ -1,5 +1,6 @@
 <div class="container">
-  <section class="row  mb-4">
+  <section class="row  mb-5">
+    <!-- Subcategories -->
     <div class="sub-categories col-lg-4 my-auto">
       <div class="title text-center">
         <h5>Subcatgories</h5>
@@ -10,11 +11,12 @@
         </ng-container>
       </ul>
     </div>
+    <!-- Top rated -->
     <div class="top-rated col-lg-8 ">
       <div class="title text-center">
         <h5>Top Rated</h5>
       </div>
-      <div id="carouselExampleIndicators" class=" h-100 carousel slide pb-3" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide h-100" data-ride="carousel">
         <div class="controls mb-1 pb-1 mt-1 pt-1 text-center">
           <a class="btn btn-primary rounded-circle float mr-1" href="#carouselExampleIndicators" role="button"
             data-slide="prev">
@@ -25,13 +27,7 @@
             <i class="fa fa-chevron-right"></i>
           </a>
         </div>
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active float"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" class="float"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2" class="float"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3" class="float"></li>
-        </ol>
-        <div class="carousel-inner mb-2 h-100">
+        <div class="carousel-inner mb-2">
           <ng-container *ngFor="let p of topRatedProducts | slice:0:7; index as i; first as isFirst">
             <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
               <div class="row">
@@ -39,8 +35,8 @@
                   <div class="card float  my-1 mx-4">
                     <div *ngIf="prod?.productDiscount > 0" class="ribbon-left"><span>On sale</span></div>
                     <img class="card-img-top p-2" src="{{prod.productImgurl}}" alt="Card image cap">
-                    <div class="card-body text-center d-flex flex-column">
-                      <h5 class="card-title text-truncate">{{prod.productName}}</h5>
+                    <div class="card-body text-center">
+                      <h5 class="card-title text-truncate">{{prod?.productName}}</h5>
                       <ng-container [ngSwitch]="prod?.productDiscount >= 0">
                           <div *ngSwitchCase=" prod?.productDiscount > 0 &&  100 > prod?.productDiscount" class="d-flex flex-row justify-content-center">
                               <h5 class="mr-2 card-title text-secondary"><s>${{prod?.productPrice}}</s></h5>
@@ -76,9 +72,31 @@
             </div>
           </ng-container>
         </div>
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active float"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="float"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2" class="float"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3" class="float"></li>
+          </ol>
       </div>
     </div>
   </section>
+  <!-- Sorting -->
+  <div class="row py-1">
+          <label class="col-lg-2 pt-1">Sort by :</label>
+
+      <div class="col-lg-5 pull-left d-flex flex-row justify-content-lg-around justify-content-start align-items-center  pb-1">
+        <label class="d-none d-sm-flex">Name : </label>
+            <button class="btn  btn-rounded mr-1" (click)="sortByName('asc')">A to Z</button>
+            <button class="btn  btn-rounded" (click)="sortByName('desc')">Z to A</button>
+      </div>
+      <div class="col-lg-5 pull-left d-flex flex-row justify-content-lg-around justify-content-start align-items-center  ">
+        <label class="d-none d-sm-flex">Price : </label>
+            <button class="btn  btn-rounded mr-1" (click)="sortByPrice('asc')">High to low</button>
+            <button class="btn  btn-rounded" (click)="sortByPrice('desc')">Low to high</button>
+      </div>
+    </div>
+    <!-- Products -->
   <div class="row mb-2 mt-5">
     <ng-container *ngFor="let p of products; index as i">
       <div class="col-md-6 col-lg-3 mb-4 cards">
@@ -122,6 +140,7 @@
       <div *ngIf="(i + 1) % 4 === 0" class="w-100"></div>
     </ng-container>
   </div>
+  <!-- Pagination -->
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item">

@@ -1,0 +1,13 @@
+
+  <label for="drop" class="input-group">
+    <input type="text" class="form-control search" placeholder="Search for products" [(ngModel)]="searchTerm">
+    <div class="input-group-append">
+      <button class="btn search-btn" type="button"><span class="fa fa-search text-primary"></span></button>
+    </div>
+  </label>
+  <div id="drop" class="mt-5 nohoverfloat">
+    <ol *ngIf="searchTerm?.length >= 2" (clickOutside)=" close()" [ngClass]="{'d-none': clickedOutside}" class="list-group ">
+      <li class="list-group-item w-100" *ngFor="let p of products | search:searchTerm; last as isLast; first as isFirst;" [ngClass]="{'sugg': isLast, 'sugg-top': isFirst }"><a href="#" class="dropdown-item text-truncate"
+          (click)="close()" [routerLink]="['/product', p.productId]">{{p?.productName}}</a></li>
+    </ol>
+  </div>

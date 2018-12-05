@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { CartService } from './services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './bars/footer/footer.component';
@@ -12,6 +13,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './bars/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
+import { SearchBoxComponent } from './bars/search-box/search-box.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -22,12 +26,16 @@ import { ProductComponent } from './product/product.component';
     FooterComponent,
     ProductsComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    SearchBoxComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ClickOutsideModule
   ],
   providers: [CookieService, CartService],
   bootstrap: [AppComponent]

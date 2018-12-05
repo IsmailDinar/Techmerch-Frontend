@@ -12,16 +12,21 @@ import { Order } from '../model/order';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  private subuscription$ = new Subscription();
+  private subscription$ = new Subscription();
   private _productId: number;
   public _product: Product;
+  public quantity = 0;
   constructor(private productService: ProductService, private cartService: CartService, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.subuscription$.add(this._activatedRoute.params.subscribe(params => {
+    this.subscription$.add(this._activatedRoute.params.subscribe(params => {
       this._productId = params['productId'];
+      this.initialiseState();
     }));
-    this.subuscription$.add(this.productService.getProductById(this._productId).subscribe((product: Product) => {
+
+  }
+  initialiseState() {
+    this.subscription$.add(this.productService.getProductById(this._productId).subscribe((product: Product) => {
       this._product = product;
     }));
   }
@@ -32,7 +37,14 @@ export class ProductComponent implements OnInit, OnDestroy {
   setDiscount(product: Product): number {
     return Math.round(product.productPrice * (1 - (product.productDiscount / 100)));
   }
+  setQuantity(s: string) {
+    if (s === 'inc') {
+      this.quantity ++;
+    } else {
+      this.quantity --;
+    }
+  }
   ngOnDestroy() {
-      this.subuscription$.unsubscribe();
+      this.subscription$.unsubscribe();
   }
 }
