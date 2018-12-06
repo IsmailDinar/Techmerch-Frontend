@@ -4,10 +4,10 @@
     <div class="col-lg-6">
       <img  *ngIf="_product" class="img-fluid p-4" [src]="_product?.productImgurl" alt="">
     </div>
-    <div class="col-lg-5 pt-4">
+    <div class="col-lg-5 p-4">
       <h2><strong>{{_product?.productName}}</strong></h2>
       <div class="row">
-          <div class="col-7 text-left">
+          <div class="col-lg-7 text-left">
             <ng-container [ngSwitch]="_product?.productDiscount >= 0">
               <div *ngSwitchCase=" _product?.productDiscount > 0 &&  100 > _product?.productDiscount" class="d-flex flex-row">
                   <h5 class="mr-2 card-title text-secondary"><s>${{_product?.productPrice}}</s></h5>
@@ -22,7 +22,7 @@
               </div>
           </ng-container>
           </div>
-          <div class="col-5">
+          <div class="col-lg-5">
               <ng-container *ngIf="_product?.productAvailability ; then instock else outofstock" ></ng-container>
             <ng-template #instock>
                 <h5 class="text-success"><i class="fa fa-check mr-1"></i>In stock</h5>
@@ -36,14 +36,14 @@
         <p class="text-justify mx-xs-1">{{_product?.productDescription}}</p>
       </div>
       <div class="d-flex flex-row justify-content-end align-items-center">
-              <div class="input-group d-flex flex-row justify-content-end align-items-center mb-1 pb-1 quantity w-25">
+              <div class="input-group d-flex flex-row justify-content-end align-items-center mb-1 pb-1 w-25">
                 <span class="badge red-grad nohoverfloat text-light mr-1">{{quantity}}</span>
-                <button class="btn-xs btn-primary text-center btn-float w-25 btn-plus" (click)="setQuantity('inc')">+</button>
-                <button class="btn-xs btn-primary text-center btn-float w-25 btn-minus" (click)="setQuantity('down')">-</button>
+                <button class="btn btn-primary  btn-float w-25 btn-plus" (click)="setQuantity('inc')">+</button>
+                <button class="btn btn-primary  btn-float w-25 btn-minus" (click)="setQuantity('down')">-</button>
               </div>
 
         <div class="mb-1  pb-1 w-50 d-flex flex-row justify-content-end">
-          <button  class="btn btn-primary  float btn-rounded"  (click)="addToCart(_product.productId,1)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+          <button  class="btn btn-primary  float btn-rounded"  (click)="addToCart(_product.productId,quantity)"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
         </div>
 
       </div>

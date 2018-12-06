@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   private subscription$ = new Subscription();
   private _productId: number;
   public _product: Product;
-  public quantity = 0;
+  public quantity = 1;
   constructor(private productService: ProductService, private cartService: CartService, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -41,7 +41,9 @@ export class ProductComponent implements OnInit, OnDestroy {
     if (s === 'inc') {
       this.quantity ++;
     } else {
-      this.quantity --;
+      if (this.quantity > 1) {
+        this.quantity --;
+      }
     }
   }
   ngOnDestroy() {

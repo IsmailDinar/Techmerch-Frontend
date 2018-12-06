@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let p of products">
+    <tr *ngFor="let p of products; index as i">
       <td class="text-justify">
         <div class="row">
           <div class="col-sm-2"><img src="{{p.productImgurl}}" alt="..." class="img-fluid"/></div>
@@ -23,9 +23,16 @@
       </td>
       <td class="text-center align-middle">${{p.productPrice}}</td>
       <td class="align-middle">
-        <input type="number" class="form-control text-center" value="1">
+        <!-- <input type="number" class="form-control text-center" value="1"> -->
+        <div class="input-group d-flex flex-row justify-content-around align-items-center">
+          <span class="badge red-grad nohoverfloat text-light mr-1">{{quantities[i]}}</span>
+          <div class="d-flex flex-row w-50">
+            <button class="btn btn-primary  btn-float   btn-plus" (click)="setQuantity(p.productId,'inc',i)">+</button>
+          <button class="btn btn-primary  btn-float  btn-minus"(click)="setQuantity(p.productId,'dec',i)">-</button>
+          </div>
+        </div>
       </td>
-      <td  class="text-center align-middle"></td>
+      <td  class="text-center align-middle">${{getAmount(p.productPrice,quantities[i])}}</td>
       <td class="align-middle">
         <button (click)="removeItem(p.productId)" class="btn btn-danger btn-sm btn-float rounded-circle"><i class="fa fa-trash-o"></i></button>
       </td>

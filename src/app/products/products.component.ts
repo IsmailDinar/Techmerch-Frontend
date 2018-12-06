@@ -1,10 +1,11 @@
 import { SubCategory } from './../model/sub-category';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../model/product';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../services/category.service';
+import { Options, LabelType } from 'ng5-slider';
 
 @Component({
   selector: 'app-products',
@@ -12,9 +13,10 @@ import { CategoryService } from '../services/category.service';
   styleUrls: ['./products.component.css'],
   providers: [ProductService]
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   public products: Product[] = [];
+  public auxproducts: Product[] = [];
   public isActive: number;
   public subCategories: SubCategory[];
   public topRatedProducts: Product[] = [];
@@ -22,21 +24,49 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private _categoryId: number;
   private subuscription$ = new Subscription();
   private productSubuscription$ = new  Subscription();
-  constructor(private productService: ProductService, private categoryService: CategoryService, private _activatedRoute: ActivatedRoute) { }
+  public minValue = 0;
+  public maxValue = 10000;
+  public options: Options = {
+    floor: 0,
+    ceil: 10000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '<b>Min price:</b> $' + value;
+        case LabelType.High:
+          return '<b>Max price:</b> $' + value;
+        default:
+          return '$' + value;
+      }
+    }
+  };
+  // tslint:disable-next-line:max-line-length
+  constructor(private productService: ProductService, private categoryService: CategoryService, private _activatedRoute: ActivatedRoute, private cdRef: ChangeDetectorRef) { }
   ngOnInit() {
     this.subuscription$ = this._activatedRoute.params.subscribe(params => {
       this._categoryId = params['categoryId'];
       this.initialiseState();
-
       this.categoryService.getSubCategoriesByCategory(this._categoryId).subscribe((subCategories: SubCategory[]) => {
         this.subCategories = subCategories;
       });
     });
+
+  }
+  ngAfterViewChecked() {
+    this.products = this.products.filter(item => item.productPrice >= this.minValue && item.productPrice <= this.maxValue);
+    this.cdRef.detectChanges();
   }
   initialiseState() {
     this.productService.getProductsByCategory(this._categoryId).subscribe((products: Product[]) => {
-      this.products = [...products].sort((a, b) => {
+      this.auxproducts = [...products].sort((a, b) => {
+
         return (a.productPrice * (1 - (a.productDiscount / 100))) - (b.productPrice * (1 - (b.productDiscount / 100)));
+
+      });
+      this.products = [...products].sort((a, b) => {
+
+        return (a.productPrice * (1 - (a.productDiscount / 100))) - (b.productPrice * (1 - (b.productDiscount / 100)));
+
       });
       this.topRatedProducts = products.sort((a, b) => {
         return b.productRate - a.productRate;
@@ -84,6 +114,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
     }
 
+  }
+  restAll() {
+    this.minValue = 0;
+    this.maxValue = 10000;
+    this.products = this.auxproducts;
   }
   ngOnDestroy() {
       this.productSubuscription$.unsubscribe();

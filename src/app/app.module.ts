@@ -16,6 +16,7 @@ import { ProductComponent } from './product/product.component';
 import { SearchBoxComponent } from './bars/search-box/search-box.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    Ng5SliderModule
   ],
   providers: [CookieService, CartService],
   bootstrap: [AppComponent]

@@ -32,7 +32,7 @@
             <div *ngIf="i % 2 === 0" [ngClass]="{active: isFirst}" class="carousel-item ">
               <div class="row">
                 <div *ngFor="let prod of topRatedProducts | slice:i:(i+2)" class="col-lg-6">
-                  <div class="card float  my-1 mx-4">
+                  <div class="card float  my-4 mx-4">
                     <div *ngIf="prod?.productDiscount > 0" class="ribbon-left"><span>On sale</span></div>
                     <img class="card-img-top p-2" src="{{prod.productImgurl}}" alt="Card image cap">
                     <div class="card-body text-center">
@@ -64,7 +64,7 @@
                         <li class="d-inline"><i class="fa fa-star"></i></li>
                         <li class="d-inline"><i class="fa fa-star-o"></i></li>
                       </ul>
-                      <a href="#" class="btn btn-primary btn-float btn-block mt-auto " [routerLink]="['/product', prod.productId]">More details</a>
+                      <a href="#" class="btn btn-primary btn-float btn-block mt-auto" [routerLink]="['/product', prod.productId]">More details</a>
                     </div>
                   </div>
                 </div>
@@ -81,21 +81,30 @@
       </div>
     </div>
   </section>
-  <!-- Sorting -->
-  <div class="row py-1">
+
+  <section class="sort-filter mt-2 rounded p-2">
+    <!-- Sorting -->
+      <div class="row py-1">
           <label class="col-lg-2 pt-1">Sort by :</label>
 
       <div class="col-lg-5 pull-left d-flex flex-row justify-content-lg-around justify-content-start align-items-center  pb-1">
         <label class="d-none d-sm-flex">Name : </label>
-            <button class="btn  btn-rounded mr-1" (click)="sortByName('asc')">A to Z</button>
-            <button class="btn  btn-rounded" (click)="sortByName('desc')">Z to A</button>
+            <button class="btn btn-primary btn-float btn-rounded mr-1" (click)="sortByName('asc')">A to Z</button>
+            <button class="btn btn-primary btn-float btn-rounded" (click)="sortByName('desc')">Z to A</button>
       </div>
       <div class="col-lg-5 pull-left d-flex flex-row justify-content-lg-around justify-content-start align-items-center  ">
         <label class="d-none d-sm-flex">Price : </label>
-            <button class="btn  btn-rounded mr-1" (click)="sortByPrice('asc')">High to low</button>
-            <button class="btn  btn-rounded" (click)="sortByPrice('desc')">Low to high</button>
+            <button class="btn  btn-primary btn-float btn-rounded mr-1" (click)="sortByPrice('asc')">High to low</button>
+            <button class="btn btn-primary btn-float btn-rounded" (click)="sortByPrice('desc')">Low to high</button>
       </div>
     </div>
+    <!-- Filtring -->
+    <div class="d-flex flex-column mt-2">
+        <label for="pricerange">Price Range :</label>
+        <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" id="pricerange"></ng5-slider>
+        <span class="w-25 align-self-start mt-1"><button class="btn btn-primary btn-float btn-rounded " (click)="restAll()">Reset All</button></span>
+    </div>
+  </section>
     <!-- Products -->
   <div class="row mb-2 mt-5">
     <ng-container *ngFor="let p of products; index as i">
@@ -140,24 +149,4 @@
       <div *ngIf="(i + 1) % 4 === 0" class="w-100"></div>
     </ng-container>
   </div>
-  <!-- Pagination -->
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>
