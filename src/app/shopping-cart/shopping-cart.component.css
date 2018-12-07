@@ -18,3 +18,8 @@
   min-width: 1.3rem;
   vertical-align: center;
 }
+.address{
+  min-width: 20rem;
+  border-radius: 3rem;
+  border: 1px solid #ced4da;
+}

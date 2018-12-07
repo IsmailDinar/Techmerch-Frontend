@@ -1,0 +1,66 @@
+<div class="card nohoverfloat rounded d-flex flex-column align-items-center justify-content-center">
+  <div class="row w-100">
+    <div class="col-lg-5 text-center">
+        <h2>Log in with</h2>
+      <div class="d-flex flex-column mx-1">
+        <button class="my-3 text-light btn btn-google btn-rounded btn-float w-75 mx-auto" (click)="loginWithGoogle()" ><i class="fa fa-google-plus mr-2"></i>
+           Google</button>
+        <button class="my-3 text-light btn btn-facebook btn-rounded btn-float w-75 mx-auto" (click)="loginWithFacebook()"><i class="fa fa-facebook mr-2"></i>Facebook</button>
+        <button class="my-3 text-light btn btn-twitter btn-rounded btn-float w-75 mx-auto" (click)="loginWithTwitter()"><i class="fa fa-twitter mr-2"></i>Twitter</button>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="d-flex flex-column justify-content-center h-100 align-items-center">
+        <span><strong>Or</strong></span>
+      </div>
+    </div>
+    <div class="col-lg-6 text-center">
+      <h2>Sign in manually</h2>
+      <div class="d-flex flex-column justify-content-center h-75 align-items-center">
+        <form #loginForm="ngForm" class="d-flex flex-column justify-content-center align-items-center w-100">
+          <label [hidden]=" email.valid || email.pristine" for="inputEmail" class="text-danger">Please enter a valid email</label>
+        <input type="email" class="form-control w-75 my-2" id="inputEmail" placeholder="email@exmaple.com" required [(ngModel)]="userEmail" name="email" #email="ngModel">
+        <label [hidden]=" password.valid || password.pristine" for="inputPassword" class="text-danger">Wrong password</label>
+        <input type="password" class="form-control w-75 my-2" id="inputPassword" placeholder="Password" required [(ngModel)]="userPassword" name="password" #password="ngModel">
+        <div class="d-flex flex-row justify-content-between w-75 mb-4">
+            <div class="w-50 d-flex flex-row justify-content-start form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1"> Remember me</label>
+            </div>
+            <div class="w-50 d-flex flex-row justify-content-end">
+                <button type="submit" [disabled]="!loginForm.form.valid" (click)="loginWithEmailAndPwd()" class="btn btn-primary btn-rounded btn-float">Login <i class="fa fa-sign-in"></i></button>
+            </div>
+        </div>
+      </form>
+        <div class="d-flex flex-row justify-content-between w-75 mt-2">
+          <a href="" class="text-danger" data-toggle="modal" data-target="#register"><strong>Register now</strong></a>
+          <a href="" class="text-secondary"><strong>Forget password?</strong></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #loginForm="ngForm" class="d-flex flex-column justify-content-center align-items-center w-100">
+                <label [hidden]=" email.valid || email.pristine" for="regEmail" class="text-danger">Please enter a valid email</label>
+              <input type="email" class="form-control w-75 my-2" id="regEmail" placeholder="email@exmaple.com" required [(ngModel)]="userEmail" name="email" #email="ngModel">
+              <label [hidden]=" password.valid || password.pristine" for="regPassword" class="text-danger">Wrong password</label>
+              <input type="password" class="form-control w-75 my-2" id="regPassword" placeholder="Password" required [(ngModel)]="userPassword" name="password" #password="ngModel">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="createUser()" data-dismiss="modal">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>

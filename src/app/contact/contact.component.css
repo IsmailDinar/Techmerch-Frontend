@@ -1,0 +1,7 @@
+textarea{
+  min-height: 10rem;
+  border-radius: 1rem;
+}
+#name,#phone,#email {
+  border-radius: 1rem;
+}

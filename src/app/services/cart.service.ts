@@ -1,7 +1,6 @@
 import { CartItem } from './../model/cart-item';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
-import { Product } from '../model/product';
 import { Subject } from 'rxjs';
 
 @Injectable({

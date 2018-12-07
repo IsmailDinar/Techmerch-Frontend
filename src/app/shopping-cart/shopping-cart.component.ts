@@ -1,8 +1,13 @@
+import { CartItem } from './../model/cart-item';
+import { AuthService } from './../services/auth.service';
+import { OrderService } from './../services/order.service';
 import { Subscription } from 'rxjs';
 import { ProductService } from './../services/product.service';
 import { Product } from 'src/app/model/product';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { CartService } from '../services/cart.service';
+import { Order } from '../model/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,14 +20,39 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   public isEmpty = true;
   public total = 0;
-  constructor(private productService: ProductService, private cartService: CartService) { }
+  public userUid = '';
+  public shippingAddress: string;
+  // tslint:disable-next-line:max-line-length
+  constructor(private productService: ProductService, private cartService: CartService, private orderService: OrderService, private authService: AuthService,  private router: Router) { }
 
   ngOnInit() {
     if (this.cartService.getNumberOfItems() !== 0 ) {
       this.getItems();
       this.isEmpty = false;
-      console.log(this.products);
     }
+  }
+  addOrder() {
+    this.userUid = this.authService.userUid;
+    if (this.userUid) {
+    const order = new Order();
+    order.orderCreationDate = new Date();
+    order.orderEtaDate = new Date();
+    order.orderUpdateDate = new Date();
+    const productsIds = [];
+    for (let i = 0; i < this.products.length; i++) {
+      const cartItem = new CartItem(0, 0);
+      cartItem.productId =  this.products[i].productId;
+      cartItem.quantity = this.quantities[i];
+      productsIds.push(cartItem);
+      order.orderAmount += this.products[i].productPrice * this.quantities[i];
+    }
+    order.orderProducts = JSON.stringify(productsIds);
+    order.orderClientId = this.authService.userUid;
+    order.orderShippingAddress = this.shippingAddress;
+    this.orderService.addOrder(order).subscribe();
+  } else {
+    this.router.navigateByUrl('/login');
+  }
   }
   getItems() {
     const cartItems = this.cartService.getItems();
@@ -32,11 +62,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
           this.products.push(product);
         }));
       }
-  }
-  getAmount(price: number, quantity: number): number {
-    this.total += (price * quantity);
-    console.log(this.total);
-    return price * quantity;
   }
   setQuantity(productId: number, s: string , i: number) {
     let q = 0;

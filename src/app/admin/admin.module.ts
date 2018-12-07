@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { ManageProductsComponent } from './manage-products/manage-products.component';
+import { ManagaOrdersComponent } from './managa-orders/managa-orders.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
     AdminRoutingModule,
     FormsModule
   ],
-  declarations: [ManageProductsComponent]
+  declarations: [ManageProductsComponent, ManagaOrdersComponent]
 })
 export class AdminModule { }

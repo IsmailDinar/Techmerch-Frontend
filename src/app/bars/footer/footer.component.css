@@ -23,3 +23,11 @@
   background-color: #ff0000;
   color: #fff;
 }
+.page-footer{
+  background-color: #2196f3;
+  background-image: url('../../../../img/gplay.png')
+
+}
+a{
+  color : white;
+}

@@ -1,0 +1,18 @@
+.or{
+  border: 1px solid #ced4da;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  border-radius: 3rem;
+}
+.btn-google{
+  background: #c32f10;
+}
+.btn-twitter{
+  background: #00aced;
+}
+.btn-facebook{
+  background: #3b5998;
+}
+.card{
+  min-height:70vh;
+}
